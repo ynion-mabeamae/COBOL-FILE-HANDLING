@@ -174,7 +174,7 @@
            END-IF
 
            DISPLAY '------------------------------------------'.
-           DISPLAY 'Enter Employee ID to delete:' WITH NO ADVANCING.
+           DISPLAY 'Enter Employee ID to delete: ' WITH NO ADVANCING.
            ACCEPT WS-EmployeeID.
 
            PERFORM UNTIL WS-File-Status = '10'
