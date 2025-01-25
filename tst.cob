@@ -68,7 +68,7 @@
        
        CreateEmployee.
            CALL 'SYSTEM' USING 
-           'IF NOT EXIST employees.dat ECHO.>employees.dat'
+               'IF NOT EXIST employees.dat ECHO.>employees.dat'
            OPEN EXTEND EmployeeFile
            IF WS-File-Status NOT = '00'
                DISPLAY 'Error opening EmployeeFile for extend, status: ' 
@@ -176,7 +176,7 @@
            END-IF
 
            DISPLAY '------------------------------------------'.
-           DISPLAY 'Enter Employee ID to delete:' WITH NO ADVANCING.
+           DISPLAY 'Enter Employee ID to delete: ' WITH NO ADVANCING.
            ACCEPT WS-EmployeeID.
 
            PERFORM UNTIL WS-File-Status = '10'
