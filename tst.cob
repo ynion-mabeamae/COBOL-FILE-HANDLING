@@ -67,9 +67,7 @@
            STOP RUN.
        
        CreateEmployee.
-           CALL 'SYSTEM' USING 
-           'IF NOT EXIST employees.dat ECHO.>employees.dat'
-           OPEN EXTEND EmployeeFile
+           OPEN OUTPUT EmployeeFile
            IF WS-File-Status NOT = '00'
                DISPLAY 'Error opening EmployeeFile for extend, status: ' 
                    WS-File-Status
