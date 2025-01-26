@@ -50,7 +50,7 @@
                ACCEPT WS-Choice
                EVALUATE WS-Choice
                    WHEN '1'
-                       PERFORM CreateEmployee
+                       PERFORM FileEmptyOrNot
                    WHEN '2'
                        PERFORM ReadEmployees
                    WHEN '3'
@@ -65,6 +65,25 @@
                ACCEPT WS-Continue
            END-PERFORM
            STOP RUN.
+
+       FileEmptyOrNot.
+           OPEN I-O EmployeeFile
+           IF WS-File-Status = '35'
+               DISPLAY 'File does not exist. Creating a new file.'
+               PERFORM CreateEmployee
+           ELSE
+               READ EmployeeFile
+                   AT END
+                       DISPLAY 'File is empty. Adding the first record.'
+                       CLOSE EmployeeFile
+                       PERFORM CreateEmployee
+                   NOT AT END
+                       CLOSE EmployeeFile
+                       DISPLAY 'File is not empty. Adding a new record.'
+                       PERFORM AddEmployee
+               END-READ
+           END-IF
+           CLOSE EmployeeFile.
        
        CreateEmployee.
            OPEN OUTPUT EmployeeFile
