@@ -116,6 +116,38 @@
            CLOSE EmployeeFile.
 
            DISPLAY 'Employee added successfully'.
+
+       AddEmployee.
+           OPEN EXTEND EmployeeFile
+           IF WS-File-Status NOT = '00'
+               DISPLAY 'Error opening EmployeeFile for extend, status: ' 
+                   WS-File-Status
+               STOP RUN
+           END-IF
+           DISPLAY '------------------------------------------'.
+           DISPLAY 'Enter Employee ID: ' WITH NO ADVANCING.
+           ACCEPT WS-EmployeeID.
+           DISPLAY 'Enter Employee Name: ' WITH NO ADVANCING.
+           ACCEPT WS-EmployeeName.
+           DISPLAY 'Enter Employee Grade: ' WITH NO ADVANCING.
+           ACCEPT WS-EmployeeGrade.
+           DISPLAY 'Enter Employee Salary: ' WITH NO ADVANCING.
+           ACCEPT WS-EmployeeSalary.
+           DISPLAY '------------------------------------------'.
+
+           MOVE WS-EmployeeID TO EmployeeID
+           MOVE WS-EmployeeName TO EmployeeName
+           MOVE WS-EmployeeGrade TO EmployeeGrade
+           MOVE WS-EmployeeSalary TO EmployeeSalary
+           WRITE EmployeeRecord
+
+           IF WS-File-Status NOT = '00'
+               DISPLAY 'Error writing to EmployeeFile, status: ' 
+                   WS-File-Status
+           END-IF
+           CLOSE EmployeeFile.
+
+           DISPLAY 'Employee added successfully'.
        
        ReadEmployees.
            OPEN INPUT EmployeeFile
