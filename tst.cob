@@ -6,6 +6,7 @@
        FILE-CONTROL.
            SELECT EmployeeFile 
                ASSIGN TO 'employees.dat'
+               
                ORGANIZATION IS LINE SEQUENTIAL
                FILE STATUS IS WS-FILE-STATUS.
                
@@ -40,14 +41,15 @@
        
        PROCEDURE DIVISION.
            PERFORM UNTIL WS-Continue = 'N'
-               DISPLAY '--------Employee Management System--------'
+               DISPLAY '----Employee Performance and Salary Tracker----'
                DISPLAY '1. Create'
                DISPLAY '2. Read'
                DISPLAY '3. Update'
                DISPLAY '4. Delete'
-               DISPLAY '------------------------------------------'
+               DISPLAY '-----------------------------------------------'
                DISPLAY 'Enter your choice: ' WITH NO ADVANCING
                ACCEPT WS-Choice
+               CALL 'SYSTEM' USING 'CLS'
                EVALUATE WS-Choice
                    WHEN '1'
                        PERFORM FileEmptyOrNot
@@ -63,6 +65,7 @@
                DISPLAY 'Do you want to continue (Y/N)?: ' 
                WITH NO ADVANCING
                ACCEPT WS-Continue
+               CALL 'SYSTEM' USING 'CLS'
            END-PERFORM
            STOP RUN.
 
